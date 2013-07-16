@@ -12,6 +12,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.sap.cloud.barsystem.Order;
+
 /**
  * Data access object encapsulating all JDBC operations for a order.
  */

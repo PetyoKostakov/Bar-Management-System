@@ -69,4 +69,55 @@
     <servlet-name>ManagerServlet</servlet-name>
     <url-pattern>/ManagerServlet</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  
+    <servlet>
+    <description></description>
+    <display-name>DrinksList</display-name>
+    <servlet-name>DrinksList</servlet-name>
+    <servlet-class>com.sap.cloud.barsystem.ui.DrinksList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DrinksList</servlet-name>
+    <url-pattern>/drinks</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserRegistration</display-name>
+    <servlet-name>UserRegistration</servlet-name>
+    <servlet-class>com.sap.cloud.barsystem.ui.UserRegistration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserRegistration</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <resource-ref>
+    <res-ref-name>jdbc/DefaultDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+  </resource-ref>
+  <servlet>
+    <description></description>
+    <display-name>OrderPlace</display-name>
+    <servlet-name>OrderPlace</servlet-name>
+    <servlet-class>com.sap.cloud.barsystem.ui.OrderPlace</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderPlace</servlet-name>
+    <url-pattern>/order</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </web-app>

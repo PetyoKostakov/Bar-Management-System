@@ -15,6 +15,9 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sap.cloud.barsystem.Order;
+import com.sap.cloud.barsystem.dao.DrinkDAO;
+import com.sap.cloud.barsystem.dao.OrderDAO;
 import com.sap.security.core.server.csi.IXSSEncoder;
 import com.sap.security.core.server.csi.XSSEncoder;
 
