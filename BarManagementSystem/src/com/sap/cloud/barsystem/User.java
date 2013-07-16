@@ -11,10 +11,10 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    private int access;
+    private BarRole role;
 
     public String getUserName() {
-        return userName;
+    	return userName;
     }
 
     public void setUserName(String newUserName) {

@@ -1,4 +1,4 @@
-package com.sap.cloud.barsystem;
+package com.sap.cloud.barsystem.dao;
 
 
 
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
+
+import com.sap.cloud.barsystem.User;
 
 /**
  * Data access object encapsulating all JDBC operations for a user.

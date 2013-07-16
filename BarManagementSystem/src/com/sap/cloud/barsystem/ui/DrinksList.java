@@ -1,4 +1,4 @@
-package com.sap.cloud.barsystem;
+package com.sap.cloud.barsystem.ui;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sap.cloud.barsystem.Drink;
+import com.sap.cloud.barsystem.dao.DrinkDAO;
 import com.sap.security.core.server.csi.IXSSEncoder;
 import com.sap.security.core.server.csi.XSSEncoder;
 

@@ -1,0 +1,122 @@
+body {
+  background-color: #4f4f4f;
+  color: white;
+  font-family: Verdana; }
+  body #header {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-bottom: 0px; }
+    body #header img {
+      float: left; }
+    body #header h2 {
+      font-size: 40px;
+      margin: 0px;
+      font-family: Verdana; }
+  body #dataContainer {
+    background: #2b2b2b;
+    background: -moz-radial-gradient(center, ellipse cover, #2b2b2b 0%, #3e3e3e 0%, #2b2b2b 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #2b2b2b), color-stop(0%, #3e3e3e), color-stop(100%, #2b2b2b));
+    background: -webkit-radial-gradient(center, ellipse cover, #2b2b2b 0%, #3e3e3e 0%, #2b2b2b 100%);
+    background: -o-radial-gradient(center, ellipse cover, #2b2b2b 0%, #3e3e3e 0%, #2b2b2b 100%);
+    background: -ms-radial-gradient(center, ellipse cover, #2b2b2b 0%, #3e3e3e 0%, #2b2b2b 100%);
+    background: radial-gradient(ellipse at center, #2b2b2b 0%, #3e3e3e 0%, #2b2b2b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2b2b2b', endColorstr='#2b2b2b',GradientType=1 );
+    border: 1px solid white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    border-radius: 20px;
+    box-shadow: -4px 5px 11px rgba(255, 255, 255, 0.23); }
+    body #dataContainer #dataHeader {
+      margin-left: 10px; }
+      body #dataContainer #dataHeader #pageTitle {
+        font-size: 25px; }
+      body #dataContainer #dataHeader #buttons {
+        float: right; }
+        body #dataContainer #dataHeader #buttons #addOrder {
+          background: #ff9d1e;
+          background: -moz-radial-gradient(center, ellipse cover, #ff9d1e 0%, #ff9800 100%);
+          background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #ff9d1e), color-stop(100%, #ff9800));
+          background: -webkit-radial-gradient(center, ellipse cover, #ff9d1e 0%, #ff9800 100%);
+          background: -o-radial-gradient(center, ellipse cover, #ff9d1e 0%, #ff9800 100%);
+          background: -ms-radial-gradient(center, ellipse cover, #ff9d1e 0%, #ff9800 100%);
+          background: radial-gradient(ellipse at center, #ff9d1e 0%, #ff9800 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9d1e', endColorstr='#ff9800',GradientType=1 );
+          border: 0px;
+          border-top-right-radius: 19px;
+          font-size: 25px;
+          margin-top: 0px;
+          margin-right: 0px; }
+          body #dataContainer #dataHeader #buttons #addOrder:hover {
+            background: #dc6626;
+            background: -moz-radial-gradient(center, ellipse cover, #dc6626 0%, #bb4c26 100%);
+            background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #dc6626), color-stop(100%, #bb4c26));
+            background: -webkit-radial-gradient(center, ellipse cover, #dc6626 0%, #bb4c26 100%);
+            background: -o-radial-gradient(center, ellipse cover, #dc6626 0%, #bb4c26 100%);
+            background: -ms-radial-gradient(center, ellipse cover, #dc6626 0%, #bb4c26 100%);
+            background: radial-gradient(ellipse at center, #dc6626 0%, #bb4c26 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dc6626', endColorstr='#bb4c26',GradientType=1 );
+            cursor: pointer; }
+    body #dataContainer .line {
+      height: 4px;
+      background: #434343;
+      background: -moz-linear-gradient(top, #434343 0%, #434343 50%, #343434 51%, #343434 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #434343), color-stop(50%, #434343), color-stop(51%, #343434), color-stop(100%, #343434));
+      background: -webkit-linear-gradient(top, #434343 0%, #434343 50%, #343434 51%, #343434 100%);
+      background: -o-linear-gradient(top, #434343 0%, #434343 50%, #343434 51%, #343434 100%);
+      background: -ms-linear-gradient(top, #434343 0%, #434343 50%, #343434 51%, #343434 100%);
+      background: linear-gradient(to bottom, #434343 0%, #434343 50%, #343434 51%, #343434 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#434343', endColorstr='#343434',GradientType=0 ); }
+    body #dataContainer .order {
+      width: 670px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: inset 0px 0px 10px 2px rgba(255, 255, 255, 0.5); }
+      body #dataContainer .order #orderTitle {
+        font-size: 18px;
+        margin-left: 10px;
+        padding-top: 8px;
+        margin-bottom: 5px; }
+      body #dataContainer .order #addButton {
+        float: right;
+        background: #ff9d1e;
+        background: -moz-radial-gradient(center, ellipse cover, #ff9d1e 0%, #ff9800 100%);
+        background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #ff9d1e), color-stop(100%, #ff9800));
+        background: -webkit-radial-gradient(center, ellipse cover, #ff9d1e 0%, #ff9800 100%);
+        background: -o-radial-gradient(center, ellipse cover, #ff9d1e 0%, #ff9800 100%);
+        background: -ms-radial-gradient(center, ellipse cover, #ff9d1e 0%, #ff9800 100%);
+        background: radial-gradient(ellipse at center, #ff9d1e 0%, #ff9800 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9d1e', endColorstr='#ff9800',GradientType=1 );
+        border: 0px;
+        border-top-right-radius: 15px;
+        font-size: 18px;
+        margin-top: 0px;
+        margin-right: 0px; }
+        body #dataContainer .order #addButton:hover {
+          background: #dc6626;
+          background: -moz-radial-gradient(center, ellipse cover, #dc6626 0%, #bb4c26 100%);
+          background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #dc6626), color-stop(100%, #bb4c26));
+          background: -webkit-radial-gradient(center, ellipse cover, #dc6626 0%, #bb4c26 100%);
+          background: -o-radial-gradient(center, ellipse cover, #dc6626 0%, #bb4c26 100%);
+          background: -ms-radial-gradient(center, ellipse cover, #dc6626 0%, #bb4c26 100%);
+          background: radial-gradient(ellipse at center, #dc6626 0%, #bb4c26 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dc6626', endColorstr='#bb4c26',GradientType=1 );
+          cursor: pointer; }
+      body #dataContainer .order .orderItem {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding: 5px;
+        padding-bottom: 10px;
+        border-radius: 15px;
+        text-align: left; }
+
