@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sap.cloud.barsystem.BarRole;
 import com.sap.cloud.barsystem.User;
 import com.sap.cloud.barsystem.dao.UserDAO;
 import com.sap.security.core.server.csi.IXSSEncoder;
@@ -101,7 +102,7 @@ public class UserRegistration extends HttpServlet {
 							+ "<td>" + xssEncoder.encodeHTML(u.getUserName()) + "</td>"
 							+ "<td>" + xssEncoder.encodeHTML(u.getPassword()) + "</td>"
 							
-							+ "<td>"+ xssEncoder.encodeHTML(Integer.toString(u.getAccess())) + "</td>"
+							+ "<td>"+ xssEncoder.encodeHTML(Integer.toString(u.getAccess().getValue())) + "</td>"
 
 							+ "</tr>");
 		}
@@ -140,7 +141,7 @@ public class UserRegistration extends HttpServlet {
 			user.setLastName(lastName.trim());
 			user.setUserName(userName.trim());
 			user.setPassword(password.trim());
-			user.setAccess(Integer.parseInt(access.trim()));
+			user.setRole(BarRole.fromValue(Integer.parseInt(access.trim())));
 			userDAO.addUser(user);
 		}
 	}

@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.sap.cloud.barsystem.BarRole;
 import com.sap.cloud.barsystem.User;
 
 /**
@@ -55,7 +56,7 @@ public class UserDAO {
             pstmt.setString(2, user.getFirstName());
             pstmt.setString(3, user.getLastName());
             pstmt.setString(4, user.getPassword());
-            pstmt.setInt(5, user.getAccess());
+            pstmt.setInt(5, user.getAccess().getValue());
             pstmt.executeUpdate();
         } finally {
             if (connection != null) {
@@ -80,7 +81,7 @@ public class UserDAO {
                 u.setFirstName(rs.getString(2));
                 u.setLastName(rs.getString(3));
                 u.setPassword(rs.getString(4));
-                u.setAccess(rs.getInt(5));
+                u.setRole(BarRole.fromValue(rs.getInt(5)));
                 list.add(u);
             }
             return list;

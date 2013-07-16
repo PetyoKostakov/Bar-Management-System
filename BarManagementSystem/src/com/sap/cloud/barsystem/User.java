@@ -37,12 +37,12 @@ public class User {
         this.lastName = newLastName;
     }
     
-    public void setAccess (int newAccess) {
-    	this.access = newAccess;
+    public void setRole (BarRole newAccess) {
+    	this.role = newAccess;
     }
     
-    public int getAccess (){
-    	return this.access;
+    public BarRole getAccess (){
+    	return this.role;
     	
     }
     

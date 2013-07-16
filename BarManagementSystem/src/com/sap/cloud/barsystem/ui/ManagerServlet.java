@@ -1,4 +1,4 @@
-
+package com.sap.cloud.barsystem.ui;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +26,8 @@ public class ManagerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String user = request.getRemoteUser();
+		
 		PrintWriter out = response.getWriter();
 		showManagerForm(out);
 	}

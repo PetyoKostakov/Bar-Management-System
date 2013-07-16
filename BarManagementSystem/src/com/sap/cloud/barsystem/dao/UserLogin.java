@@ -7,8 +7,10 @@ import java.sql.SQLException;
 
 
 
+
 import javax.sql.DataSource;
 
+import com.sap.cloud.barsystem.BarRole;
 import com.sap.cloud.barsystem.User;
 
 public class UserLogin {
@@ -57,7 +59,7 @@ public class UserLogin {
                 u.setUserName(rs.getString(1));
                 u.setFirstName(rs.getString(2));
                 u.setLastName(rs.getString(3));
-                u.setAccess(rs.getInt(4));
+                u.setRole(BarRole.fromValue(rs.getInt(4)));
                    
             return u;                     
             }
