@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>BMSTEST</display-name>
+  <display-name>BarManagementSystemLocal1</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -10,70 +10,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <description></description>
-    <display-name>LoginScreenServlet</display-name>
-    <servlet-name>LoginScreenServlet</servlet-name>
-    <servlet-class>LoginScreenServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginScreenServlet</servlet-name>
-    <url-pattern>/LoginScreenServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>TestServlet</display-name>
-    <servlet-name>TestServlet</servlet-name>
-    <servlet-class>TestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TestServlet</servlet-name>
-    <url-pattern>/TestServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>WaiterScreenServlet</display-name>
-    <servlet-name>WaiterScreenServlet</servlet-name>
-    <servlet-class>WaiterScreenServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WaiterScreenServlet</servlet-name>
-    <url-pattern>/WaiterScreenServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AddOrdersWaiterServlet</display-name>
-    <servlet-name>AddOrdersWaiterServlet</servlet-name>
-    <servlet-class>AddOrdersWaiterServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddOrdersWaiterServlet</servlet-name>
-    <url-pattern>/AddOrdersWaiterServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>BartenderOrdersServlet</display-name>
-    <servlet-name>BartenderOrdersServlet</servlet-name>
-    <servlet-class>BartenderOrdersServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BartenderOrdersServlet</servlet-name>
-    <url-pattern>/BartenderOrdersServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ManagerServlet</display-name>
-    <servlet-name>ManagerServlet</servlet-name>
-    <servlet-class>ManagerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ManagerServlet</servlet-name>
-    <url-pattern>/ManagerServlet</url-pattern>
-  </servlet-mapping>
-  
-  
-  
-  
-    <servlet>
     <description></description>
     <display-name>DrinksList</display-name>
     <servlet-name>DrinksList</servlet-name>
@@ -112,6 +48,24 @@
   
   
   
+  <login-config>
+  <auth-method>FORM</auth-method>
+</login-config>
+<security-constraint>
+  <web-resource-collection>
+    <web-resource-name>Protected Area</web-resource-name>
+    <url-pattern>/index.jsp</url-pattern>
+    <url-pattern>/a2asso.jsp</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <!-- Role Everyone will not be assignable -->
+    <role-name>Everyone</role-name>
+    </auth-constraint>
+</security-constraint>
+<security-role>
+  <description>All SAP HANA Cloud users</description>
+  <role-name>Everyone</role-name>
+</security-role>
   
   
   

@@ -11,13 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
 
 import com.sap.cloud.barsystem.Order;
 import com.sap.cloud.barsystem.dao.DrinkDAO;
 import com.sap.cloud.barsystem.dao.OrderDAO;
+import com.sap.security.auth.login.LoginContextFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sap.security.core.server.csi.IXSSEncoder;
 import com.sap.security.core.server.csi.XSSEncoder;
 
@@ -33,6 +37,7 @@ public class OrderPlace extends HttpServlet {
 	private OrderDAO orderDAO;
 	int id =1;
 	private DrinkDAO drinkDAO;
+	private LoggedInUser loggedInUser;
 	String itemsString="";
 	Double tottalCost=0.0;
 
@@ -45,18 +50,44 @@ public class OrderPlace extends HttpServlet {
 					.lookup("java:comp/env/jdbc/DefaultDB");
 			orderDAO = new OrderDAO(ds);
 			drinkDAO = new DrinkDAO(ds);
+			loggedInUser = new LoggedInUser(ds);
 		} catch (SQLException e) {
 			throw new ServletException(e);
 		} catch (NamingException e) {
 			throw new ServletException(e);
 		}
+		
+		
+		
 	}
+	
+	
+	
+	
 
 	/** {@inheritDoc} */
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().println("<p>Order Placement!</p>");
+		String user = request.getRemoteUser();
+		int p=0;
+	try {
+			p=loggedInUser.getAccess(user);
+			
+		} catch (SQLException e1) {
+			
+			
+			response.getWriter().println("<p> Exception</p>");
+			
+
+		}
+
+//		u.getAccess()==1
+		
+		if (user != null) {
+			
+			if(p==1){
+		response.getWriter().println("<p>Order Placement!    "+p+"   </p>");
 		try {
 			appendOrderTable(response);
 			appendAddForm(response);
@@ -66,6 +97,21 @@ public class OrderPlace extends HttpServlet {
 							+ e.getMessage());
 			LOGGER.error("Persistence operation failed", e);
 		}
+			} else {response.getWriter().println("You don't have the permision to view this"); }
+			
+			
+	    } else {
+	        LoginContext loginContext;
+	        try {
+	          loginContext = LoginContextFactory.createLoginContext("FORM");
+	          loginContext.login();
+	          response.getWriter().println("Hello, " + request.getRemoteUser());
+
+	        } catch (LoginException e) {
+	          e.printStackTrace();
+	        }
+	      }
+		
 	}
 
 	/** {@inheritDoc} */
@@ -84,11 +130,15 @@ public class OrderPlace extends HttpServlet {
 				
 			}
 			
-			if(tottalCost!=0.0){
+			if ((request.getParameter("DeleteOrder"))!=null){
+				orderDAO.deleteOrder(Integer.parseInt(request.getParameter("DeleteOrderNumber").trim()));
+				
+			}
+		
 			response.getWriter()
 			.println(
 					"<p>"+itemsString+" "+ tottalCost+ "</p>");
-			}			
+				
 			
 			doGet(request, response);
 			
@@ -118,14 +168,14 @@ public class OrderPlace extends HttpServlet {
 		} else {
 			response.getWriter()
 					.println(
-							"<tr><th>ID</th><th>Items</th><th>Amount</th><th>Cost</th><th>Ordered by</th></tr>");
+							"<tr><th>ID</th><th>Items</th><th>Cost</th><th>Ordered by</th></tr>");
 		}
 		IXSSEncoder xssEncoder = XSSEncoder.getInstance();
 		for (Order o : resultList) {
 			response.getWriter().println(
 					"<tr><td>" + xssEncoder.encodeHTML(Integer.toString(o.getId())) + "</td>"
 							+"<td>"	+	xssEncoder.encodeHTML(o.getItems()) + "</td>"
-							+ "<td>" + xssEncoder.encodeHTML(Integer.toString(o.getAmount())) + "</td>"
+		//					+ "<td>" + xssEncoder.encodeHTML(Integer.toString(o.getAmount())) + "</td>"
 							+ "<td>" + xssEncoder.encodeHTML(Double.toString(o.getEndPrice())) + "</td>"
 							
 							+ "<td>"+ xssEncoder.encodeHTML(o.getOrderedBy()) + "</td>"
@@ -143,7 +193,7 @@ public class OrderPlace extends HttpServlet {
 				//				+ "ID:<input type=\"text\" name=\"Id\">"
 								+ "&nbsp;Items:<input type=\"text\" name=\"Item\">"
 								+ "&nbsp;Amount:<input type=\"text\" name=\"Amount\">"
-								+ "&nbsp;Cost:<input type=\"text\" name=\"EndPrice\">"
+				//				+ "&nbsp;Cost:<input type=\"text\" name=\"EndPrice\">"
 	//							+ "&nbsp;Ordered by:<input type=\"text\" name=\"OrderedBy\">"
 								+ "&nbsp;<input type=\"submit\" name=\"addItem\" value=\"Add Item\">"
 								
@@ -156,10 +206,13 @@ public class OrderPlace extends HttpServlet {
 						
 						+ "&nbsp;<input type=\"submit\" name=\"placeOrder\" value=\"Place Order\">"
 						+ "&nbsp;Ordered by:<input type=\"text\" name=\"OrderedBy\">"
+						+ "&nbsp;<input type=\"submit\" name=\"DeleteOrder\" value=\"Remove\">"
+						+ "&nbsp;Delete order:<input type=\"text\" name=\"DeleteOrderNumber\">"
+						
 						+ "</form></p>");
 		
 		
-		
+		 response.getWriter().println("<a href=\"LogoutServlet\">Logout</a>"); 
 		
 	}
 
@@ -169,12 +222,22 @@ public class OrderPlace extends HttpServlet {
 	
 	private void addItemstoOrder(HttpServletRequest request) throws ServletException,
 	IOException, SQLException {
-		
+		double p=0;
 		String item = request.getParameter("Item");
 		String amount = request.getParameter("Amount");
-		String endPrice = request.getParameter("EndPrice");
-		itemsString = itemsString + amount+ "x" +item + " ";
-		tottalCost=tottalCost+ Double.parseDouble(amount) * Double.parseDouble(endPrice);
+	//	String endPrice = request.getParameter("EndPrice");
+	
+		
+		try {
+			p=drinkDAO.getSingleDrinkPrice(item);
+			
+		} catch (SQLException e1) {      p=111111111111111.0;		}
+		
+		
+		
+		
+		itemsString = itemsString + amount+ "x" +item+ " ";
+		tottalCost=tottalCost+ Double.parseDouble(amount)*p;
 		
 	}
 	
@@ -205,7 +268,7 @@ public class OrderPlace extends HttpServlet {
 	//		order.setId(Integer.parseInt(id.trim()));
 			order.setId(id++);
 			order.setItems(itemsString);
-			order.setAmount(1);
+	//		order.setAmount(1);
 			order.setEndPrice(tottalCost);
 			order.setOrderedBy(orderedBy);
 			orderDAO.addOrder(order);

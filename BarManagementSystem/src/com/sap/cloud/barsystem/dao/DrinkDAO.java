@@ -90,6 +90,47 @@ public class DrinkDAO {
             }
         }
     }
+    
+    
+    
+    
+    
+    public Double getSingleDrinkPrice(String drinkName) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        double singlePrice=10;
+        try {
+            PreparedStatement pstmt = connection
+                    .prepareStatement("SELECT PRICE FROM DRINKS WHERE DRINKNAME='Water'");
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                rs.getDouble(1);
+   
+            }
+            
+            return singlePrice;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * Check if the drink table already exists and create it if not.
@@ -183,12 +224,12 @@ public class DrinkDAO {
         
         
         pstmt.setInt(25, 9);
-        pstmt.setString(26, "Water");
+        pstmt.setString(26, "Jin");
         pstmt.setDouble(27, 1);
         
         
         pstmt.setInt(28, 10);
-        pstmt.setString(29, "Water");
+        pstmt.setString(29, "Soda");
         pstmt.setDouble(30, 1);
         
         

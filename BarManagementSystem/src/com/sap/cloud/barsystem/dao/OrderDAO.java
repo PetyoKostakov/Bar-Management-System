@@ -50,12 +50,12 @@ public class OrderDAO {
 
         try {
             PreparedStatement pstmt = connection
-                    .prepareStatement("INSERT INTO ORDERS (ID, ITEMS, AMOUNT , ENDPRICE, ORDEREDBY) VALUES (?, ?, ?, ?, ?)");
+                    .prepareStatement("INSERT INTO ORDERS (ID, ITEMS,  ENDPRICE, ORDEREDBY) VALUES (?, ?, ?, ?)");
             pstmt.setInt(1, order.getId());
             pstmt.setString(2, order.getItems());
-            pstmt.setInt(3, order.getAmount());
-            pstmt.setDouble(4, order.getEndPrice());
-            pstmt.setString(5,order.getOrderedBy());                         /********  Ordered by logged in user *********/
+            
+            pstmt.setDouble(3, order.getEndPrice());
+            pstmt.setString(4,order.getOrderedBy());                         /********  Ordered by logged in user *********/
             pstmt.executeUpdate();
         } finally {
             if (connection != null) {
@@ -67,21 +67,23 @@ public class OrderDAO {
     /**
      * Get all orders from the table.
      */
+    int i=0;
     public List<Order> selectAllOrders() throws SQLException {
         Connection connection = dataSource.getConnection();
         try {
             PreparedStatement pstmt = connection
-                    .prepareStatement("SELECT ID, ITEMS, AMOUNT , ENDPRICE, ORDEREDBY FROM ORDERS");
+                    .prepareStatement("SELECT ID, ITEMS , ENDPRICE, ORDEREDBY FROM ORDERS");
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Order> list = new ArrayList<Order>();
             while (rs.next()) {
                 Order o = new Order();
                 o.setId(rs.getInt(1));
                 o.setItems(rs.getString(2));
-                o.setAmount(rs.getInt(3));
-                o.setEndPrice(rs.getDouble(4));
-                o.setOrderedBy(rs.getString(5));
+               
+                o.setEndPrice(rs.getDouble(3));
+                o.setOrderedBy(rs.getString(4));
                 list.add(o);
+                i++;
             }
             return list;
         } finally {
@@ -93,6 +95,19 @@ public class OrderDAO {
     
     
     
+    public int getNumberOfRows(){
+    	
+    	return this.i;
+    }
+    
+    
+    public void deleteOrder(int id) throws SQLException{
+    	Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection
+                .prepareStatement("DELETE FROM ORDERS WHERE ID="+id);
+        int rs = pstmt.executeUpdate();
+    	
+    }
     
     
     
@@ -140,7 +155,7 @@ public class OrderDAO {
                 .prepareStatement("CREATE TABLE ORDERS "
                         + "(ID INT , "
                         + "ITEMS VARCHAR (255),"
-                        + "AMOUNT INT,"
+                      
                         + "ENDPRICE DOUBLE,"
                         + "ORDEREDBY VARCHAR (255),"
                         + "PRIMARY KEY (ID))");

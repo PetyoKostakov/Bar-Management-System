@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sap.cloud.barsystem.BarRole;
 import com.sap.cloud.barsystem.User;
 import com.sap.cloud.barsystem.dao.UserDAO;
 import com.sap.security.core.server.csi.IXSSEncoder;
@@ -83,7 +82,7 @@ public class UserRegistration extends HttpServlet {
 		// Append table that lists all users
 		List<User> resultList = userDAO.selectAllUsers();
 		response.getWriter().println(
-				"<p><table border=\"1\"><tr><th colspan=\"5\">"
+				"<p><table border=\"1\"><tr><th colspan=\"4\">"
 						+ (resultList.isEmpty() ? "" : resultList.size() + " ")
 						+ "Entries in the Database</th></tr>");
 		if (resultList.isEmpty()) {
@@ -92,7 +91,7 @@ public class UserRegistration extends HttpServlet {
 		} else {
 			response.getWriter()
 					.println(
-							"<tr><th>First name</th><th>Last name</th><th>User Name</th><th>Password</th><th>Access</th></tr>");
+							"<tr><th>First name</th><th>Last name</th><th>User Name</th><th>Access</th></tr>");
 		}
 		IXSSEncoder xssEncoder = XSSEncoder.getInstance();
 		for (User u : resultList) {
@@ -100,9 +99,9 @@ public class UserRegistration extends HttpServlet {
 					"<tr><td>" + xssEncoder.encodeHTML(u.getFirstName()) + "</td>"
 							+"<td>"	+	xssEncoder.encodeHTML(u.getLastName()) + "</td>"
 							+ "<td>" + xssEncoder.encodeHTML(u.getUserName()) + "</td>"
-							+ "<td>" + xssEncoder.encodeHTML(u.getPassword()) + "</td>"
+						
 							
-							+ "<td>"+ xssEncoder.encodeHTML(Integer.toString(u.getAccess().getValue())) + "</td>"
+							+ "<td>"+ xssEncoder.encodeHTML(Integer.toString(u.getAccess())) + "</td>"
 
 							+ "</tr>");
 		}
@@ -117,7 +116,7 @@ public class UserRegistration extends HttpServlet {
 								+ "First name:<input type=\"text\" name=\"FirstName\">"
 								+ "&nbsp;Last name:<input type=\"text\" name=\"LastName\">"
 								+ "&nbsp;User Name:<input type=\"text\" name=\"UserName\">"
-								+ "&nbsp;Password:<input type=\"text\" name=\"Password\">"
+							
 								+ "&nbsp;Acess:<input type=\"text\" name=\"Access\">"
 								+ "&nbsp;<input type=\"submit\" value=\"Add User\">"
 								+ "</form></p>");
@@ -129,7 +128,7 @@ public class UserRegistration extends HttpServlet {
 		String firstName = request.getParameter("FirstName");
 		String lastName = request.getParameter("LastName");
 		String userName = request.getParameter("UserName");
-		String password = request.getParameter("Password");
+	
 		String access = request.getParameter("Access");
 		
 
@@ -140,8 +139,8 @@ public class UserRegistration extends HttpServlet {
 			user.setFirstName(firstName.trim());
 			user.setLastName(lastName.trim());
 			user.setUserName(userName.trim());
-			user.setPassword(password.trim());
-			user.setRole(BarRole.fromValue(Integer.parseInt(access.trim())));
+		
+			user.setAccess(Integer.parseInt(access.trim()));
 			userDAO.addUser(user);
 		}
 	}
