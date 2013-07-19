@@ -1,77 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>BarManagementSystemLocal1</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>DrinksList</display-name>
-    <servlet-name>DrinksList</servlet-name>
-    <servlet-class>com.sap.cloud.barsystem.ui.DrinksList</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DrinksList</servlet-name>
-    <url-pattern>/drinks</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>UserRegistration</display-name>
-    <servlet-name>UserRegistration</servlet-name>
-    <servlet-class>com.sap.cloud.barsystem.ui.UserRegistration</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserRegistration</servlet-name>
-    <url-pattern>/register</url-pattern>
-  </servlet-mapping>
-  <resource-ref>
-    <res-ref-name>jdbc/DefaultDB</res-ref-name>
-    <res-type>javax.sql.DataSource</res-type>
-  </resource-ref>
-  <servlet>
-    <description></description>
-    <display-name>OrderPlace</display-name>
-    <servlet-name>OrderPlace</servlet-name>
-    <servlet-class>com.sap.cloud.barsystem.ui.OrderPlace</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>OrderPlace</servlet-name>
-    <url-pattern>/order</url-pattern>
-  </servlet-mapping>
-  
-  
-  
-  
-  
-  <login-config>
-  <auth-method>FORM</auth-method>
-</login-config>
-<security-constraint>
-  <web-resource-collection>
-    <web-resource-name>Protected Area</web-resource-name>
-    <url-pattern>/index.jsp</url-pattern>
-    <url-pattern>/a2asso.jsp</url-pattern>
-  </web-resource-collection>
-  <auth-constraint>
-    <!-- Role Everyone will not be assignable -->
-    <role-name>Everyone</role-name>
-    </auth-constraint>
-</security-constraint>
-<security-role>
-  <description>All SAP HANA Cloud users</description>
-  <role-name>Everyone</role-name>
-</security-role>
-  
-  
-  
-  
-  
-  
-  
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>BarManagementSystemLocal</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	
+	<servlet>
+		<description></description>
+		<display-name>DrinksList</display-name>
+		<servlet-name>DrinksList</servlet-name>
+		<servlet-class>com.sap.cloud.barsystem.ui.DrinksList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DrinksList</servlet-name>
+		<url-pattern>/drinks</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>UserRegistration</display-name>
+		<servlet-name>UserRegistration</servlet-name>
+		<servlet-class>com.sap.cloud.barsystem.ui.UserRegistration</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserRegistration</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+	<resource-ref>
+		<res-ref-name>jdbc/DefaultDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+	</resource-ref>
+	<servlet>
+		<description></description>
+		<display-name>OrderPlace</display-name>
+		<servlet-name>OrderPlace</servlet-name>
+		<servlet-class>com.sap.cloud.barsystem.ui.OrderPlace</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderPlace</servlet-name>
+		<url-pattern>/oldorders</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>ManagerServlet</display-name>
+		<servlet-name>ManagerServlet</servlet-name>
+		<servlet-class>com.sap.cloud.barsystem.ui.ManagerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManagerServlet</servlet-name>
+		<url-pattern>/manage</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>WaiterScreenServlet</display-name>
+		<servlet-name>WaiterScreenServlet</servlet-name>
+		<servlet-class>com.sap.cloud.barsystem.ui.WaiterScreenServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WaiterScreenServlet</servlet-name>
+		<url-pattern>/drinkslist</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description></description>
+		<display-name>BartenderOrdersServlet</display-name>
+		<servlet-name>BartenderOrdersServlet</servlet-name>
+		<servlet-class>com.sap.cloud.barsystem.ui.BartenderOrdersServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BartenderOrdersServlet</servlet-name>
+		<url-pattern>/orders</url-pattern>
+	</servlet-mapping>
+	<login-config>
+		<auth-method>FORM</auth-method>
+	</login-config>
+
+
+	<servlet>
+		<description></description>
+		<display-name>LogoutServlet</display-name>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>com.sap.cloud.barsystem.ui.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Protected Area</web-resource-name>
+			<url-pattern>/index.jsp</url-pattern>
+			<url-pattern>/a2asso.jsp</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<!-- Role Everyone will not be assignable -->
+			<role-name>Everyone</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-role>
+		<description>All SAP HANA Cloud users</description>
+		<role-name>Everyone</role-name>
+	</security-role>
+
+
 </web-app>

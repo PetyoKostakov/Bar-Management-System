@@ -48,7 +48,7 @@ public class LoggedInUser {
        
         try {
             PreparedStatement pstmt = connection
-                    .prepareStatement("SELECT ACCESS FROM USERS2 WHERE USERNAME="+"'"+username+"'");
+                    .prepareStatement("SELECT ACCESS FROM USERS2 WHERE USERNAME="+"'"+username.toLowerCase()+"'");
             ResultSet rs = pstmt.executeQuery();
             
             while(rs.next()){

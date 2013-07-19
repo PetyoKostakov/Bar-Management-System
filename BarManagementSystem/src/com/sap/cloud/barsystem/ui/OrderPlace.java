@@ -16,6 +16,7 @@ import javax.security.auth.login.LoginException;
 
 import com.sap.cloud.barsystem.Order;
 import com.sap.cloud.barsystem.dao.DrinkDAO;
+import com.sap.cloud.barsystem.dao.LoggedInUser;
 import com.sap.cloud.barsystem.dao.OrderDAO;
 import com.sap.security.auth.login.LoginContextFactory;
 

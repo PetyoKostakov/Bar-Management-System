@@ -26,8 +26,7 @@ import com.sap.security.core.server.csi.XSSEncoder;
  */
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(UserRegistration.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserRegistration.class);
 
 	private UserDAO userDAO;
 

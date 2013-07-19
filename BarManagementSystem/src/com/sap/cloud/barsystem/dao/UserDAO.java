@@ -12,7 +12,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.sap.cloud.barsystem.BarRole;
 import com.sap.cloud.barsystem.User;
 
 /**
@@ -51,12 +50,12 @@ public class UserDAO {
 
         try {
             PreparedStatement pstmt = connection
-                    .prepareStatement("INSERT INTO USERS2 (USERNAME, FIRSTNAME, LASTNAME, PASSWORD, ACCESS) VALUES (?, ?, ?, ?, ?)");
+                    .prepareStatement("INSERT INTO USERS2 (USERNAME, FIRSTNAME, LASTNAME, ACCESS) VALUES (?, ?, ?, ?)");
             pstmt.setString(1, user.getUserName());
             pstmt.setString(2, user.getFirstName());
             pstmt.setString(3, user.getLastName());
-            pstmt.setString(4, user.getPassword());
-            pstmt.setInt(5, user.getAccess().getValue());
+    
+            pstmt.setInt(4, user.getAccess());
             pstmt.executeUpdate();
         } finally {
             if (connection != null) {
@@ -72,7 +71,7 @@ public class UserDAO {
         Connection connection = dataSource.getConnection();
         try {
             PreparedStatement pstmt = connection
-                    .prepareStatement("SELECT USERNAME, FIRSTNAME, LASTNAME, PASSWORD, ACCESS FROM USERS2");
+                    .prepareStatement("SELECT USERNAME, FIRSTNAME, LASTNAME, ACCESS FROM USERS2");
             ResultSet rs = pstmt.executeQuery();
             ArrayList<User> list = new ArrayList<User>();
             while (rs.next()) {
@@ -80,8 +79,8 @@ public class UserDAO {
                 u.setUserName(rs.getString(1));
                 u.setFirstName(rs.getString(2));
                 u.setLastName(rs.getString(3));
-                u.setPassword(rs.getString(4));
-                u.setRole(BarRole.fromValue(rs.getInt(5)));
+    
+                u.setAccess(rs.getInt(4));
                 list.add(u);
             }
             return list;
@@ -134,7 +133,7 @@ public class UserDAO {
                         + "(USERNAME VARCHAR(255), "
                         + "FIRSTNAME VARCHAR (255),"
                         + "LASTNAME VARCHAR (255),"
-                        + "PASSWORD VARCHAR (255),"
+                
                         + "ACCESS INT,"
                         + "PRIMARY KEY (USERNAME))");
         pstmt.executeUpdate();

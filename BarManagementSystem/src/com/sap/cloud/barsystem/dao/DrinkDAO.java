@@ -52,7 +52,7 @@ public class DrinkDAO {
 
         try {
             PreparedStatement pstmt = connection
-                    .prepareStatement("INSERT INTO DRINKS (ID, DRINKNAME, PRICE) VALUES (?, ?, ?)");
+                    .prepareStatement("INSERT INTO DRINKS10 (ID, DRINKNAME, PRICE) VALUES (?, ?, ?)");
             pstmt.setInt(1, drink.getId());
             pstmt.setString(2, drink.getDrinkName());
             pstmt.setDouble(3,drink.getPrice());
@@ -72,7 +72,7 @@ public class DrinkDAO {
         Connection connection = dataSource.getConnection();
         try {
             PreparedStatement pstmt = connection
-                    .prepareStatement("SELECT ID, DRINKNAME, PRICE FROM DRINKS");
+                    .prepareStatement("SELECT ID, DRINKNAME, PRICE FROM DRINKS10");
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Drink> list = new ArrayList<Drink>();
             while (rs.next()) {
@@ -97,14 +97,15 @@ public class DrinkDAO {
     
     public Double getSingleDrinkPrice(String drinkName) throws SQLException {
         Connection connection = dataSource.getConnection();
-        double singlePrice=10;
+        double singlePrice=0;
         try {
             PreparedStatement pstmt = connection
-                    .prepareStatement("SELECT PRICE FROM DRINKS WHERE DRINKNAME='Water'");
+                    .prepareStatement("SELECT PRICE FROM DRINKS10 WHERE DRINKNAME=?");
+            pstmt.setString(1, drinkName);
             ResultSet rs = pstmt.executeQuery();
             
             while (rs.next()) {
-                rs.getDouble(1);
+                singlePrice=rs.getDouble(1);
    
             }
             
@@ -140,10 +141,10 @@ public class DrinkDAO {
 
         try {
             connection = dataSource.getConnection();
-            if (!existsTable(connection)) {
-                createTable(connection);
-                fillTable(connection);
-            }
+           if (!existsTable(connection)) {
+               createTable(connection);
+               fillTable(connection);
+           }
         } finally {
             if (connection != null) {
                 connection.close();
@@ -156,10 +157,10 @@ public class DrinkDAO {
      */
     private boolean existsTable(Connection conn) throws SQLException {
         DatabaseMetaData meta = conn.getMetaData();
-        ResultSet rs = meta.getTables(null, null, "DRINKS", null);
+        ResultSet rs = meta.getTables(null, null, "DRINKS10", null);
         while (rs.next()) {
             String name = rs.getString("TABLE_NAME");
-            if (name.equals("DRINKS")) {
+            if (name.equals("DRINKS10")) {
                 return true;
             }
         }
@@ -171,7 +172,7 @@ public class DrinkDAO {
      */
     private void createTable(Connection connection) throws SQLException {
         PreparedStatement pstmt = connection
-                .prepareStatement("CREATE TABLE DRINKS "
+                .prepareStatement("CREATE TABLE DRINKS10 "
                         + "(ID INT PRIMARY KEY, "
                         + "DRINKNAME VARCHAR (255),"
         				+ "PRICE DOUBLE)"
@@ -182,62 +183,26 @@ public class DrinkDAO {
     }
     
     private void fillTable(Connection connection) throws SQLException{
+    	insertDrink(connection, 1, "Water", 1);
+    	insertDrink(connection, 2, "Coffee", 1.8);
+        insertDrink(connection, 3, "Whisky", 10);
+        insertDrink(connection, 4, "Juice", 2);
+        insertDrink(connection, 5, "Beer", 2.5);        
+        insertDrink(connection, 6, "Vodka", 5);
+        insertDrink(connection, 7, "Rakia", 8);
+        insertDrink(connection, 8, "Jin", 1);
+        insertDrink(connection, 9, "Soda", 1);
+        insertDrink(connection, 10, "Wine", 25);
+        
+        
+    }
+    
+    private void insertDrink(Connection connection, int id, String drinkName, double price) throws SQLException {
     	PreparedStatement pstmt = connection
-    			.prepareStatement("INSERT INTO DRINKS (ID, DRINKNAME, PRICE) VALUES (?,?,?), (?,?,?), (?,?,?), (?,?,?), (?,?,?), (?,?,?), (?,?,?), (?,?,?), (?,?,?), (?,?,?)");
-        pstmt.setInt(1, 1);
-        pstmt.setString(2, "Water");
-        pstmt.setDouble(3, 1);
-     
-        
-        pstmt.setInt(4, 2);
-        pstmt.setString(5, "Coffee");
-        pstmt.setDouble(6,  1.8);
-        
-        pstmt.setInt(7, 3);
-        pstmt.setString(8, "Whisky");
-        pstmt.setDouble(9, 10);
-        
-        
-        pstmt.setInt(10, 4);
-        pstmt.setString(11, "Juice");
-        pstmt.setDouble(12, 2);
-        
-        
-        pstmt.setInt(13, 5);
-        pstmt.setString(14, "Beer");
-        pstmt.setDouble(15, 2.5);
-        
-        
-        pstmt.setInt(16, 6);
-        pstmt.setString(17, "Wine");
-        pstmt.setDouble(18, 25);
-        
-        
-        pstmt.setInt(19, 7);
-        pstmt.setString(20, "Vodka");
-        pstmt.setDouble(21, 5);
-        
-        
-        pstmt.setInt(22, 8);
-        pstmt.setString(23, "Rakia");
-        pstmt.setDouble(24, 8);
-        
-        
-        pstmt.setInt(25, 9);
-        pstmt.setString(26, "Jin");
-        pstmt.setDouble(27, 1);
-        
-        
-        pstmt.setInt(28, 10);
-        pstmt.setString(29, "Soda");
-        pstmt.setDouble(30, 1);
-        
-        
-        
-       
-
-        
-
+    			.prepareStatement("INSERT INTO DRINKS10 (ID, DRINKNAME, PRICE) VALUES (?,?,?)");
+        pstmt.setInt(1, id);
+        pstmt.setString(2, drinkName);
+        pstmt.setDouble(3, price);
         pstmt.executeUpdate();
     }
     

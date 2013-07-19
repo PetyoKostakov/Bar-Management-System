@@ -11,10 +11,10 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    private BarRole role;
+    private int access;
 
     public String getUserName() {
-    	return userName;
+        return userName;
     }
 
     public void setUserName(String newUserName) {
@@ -37,12 +37,12 @@ public class User {
         this.lastName = newLastName;
     }
     
-    public void setRole (BarRole newAccess) {
-    	this.role = newAccess;
+    public void setAccess (int newAccess) {
+    	this.access = newAccess;
     }
     
-    public BarRole getAccess (){
-    	return this.role;
+    public int getAccess (){
+    	return this.access;
     	
     }
     
