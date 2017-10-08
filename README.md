@@ -6,7 +6,6 @@ SAP Summer Practice Team Project
 participants:
 
 Орхан Абдула orhan_kj@abv.bg;
-Христо Чотрев hristo_rv@abv.bg;
 Веселин Чупетловски veselin.chupetlovski@abv.bg;
 Дечо Стоянов stoynov92@gmail.com;
 Георги Андреев georgi.milenov.andreev@gmail.com;
